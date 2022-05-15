@@ -6,12 +6,11 @@ COPY ./internal /build/internal
 COPY ./go.mod /build/
 COPY ./go.sum /build/
 RUN go mod download
-RUN go build -o disgobot ./cmd/disgoBot/main.go
+RUN go build -o chatopsbot ./cmd/chatopsbot/main.go
 
 # Stage2 - Build the release image
 FROM alpine:latest
-WORKDIR /disgobot/
-COPY ./assets /disgobot/assets
-COPY --from=builder /build/disgobot /disgobot/
+WORKDIR /chatopsbot/
+COPY --from=builder /build/chatopsbot /chatopsbot/
 
-CMD ["./disgobot"]
+CMD ["./chatopsbot"]
