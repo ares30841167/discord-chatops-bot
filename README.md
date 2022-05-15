@@ -20,6 +20,9 @@ The .env file should look like as below:
 ```
 DISCORD_TOKEN=<Fill in the bot's token>
 GUILD_ID=<Fill in the id of the target guild>
+GITLAB_BASE_URL=<Fill in the base url of the target gitlab>
+CI_TRIGGER_TOKEN=<Fill in the token of the pipeline trigger>
+PROJECT_ID=<Fill in the ID of the project belonged the pipeline trigger>
 ```
 
 Then, you can use `go build cmd\chatopsbot\main.go` to build the executable and run it.
@@ -43,3 +46,10 @@ The following are the developers who mainly maintain this project.
 
 ## Project status
 Just started.
+
+## TODO List
+- [ ] Refactor pkg/restapi/gitlab/pipeline_trigger.go TriggerPipeline Function
+- [ ] Refactor internal/chatopsbot/slashcmd/slash_cmd_register_helper.go RegisterAllSlashCommands Function
+- [ ] Add unit test for pkg/restapi/gitlab
+- [ ] Add job scripts with discord channel callback to .gitlab-ci.yml in the disgobot project
+- [ ] Make documentation
