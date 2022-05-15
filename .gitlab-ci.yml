@@ -6,6 +6,8 @@ stages:
 go-test:
   image: golang:1.18
   stage: test
+  variables:
+    GUILD_ID: "TEST ENV"
   tags:
     - areschen-server-1
   script:
