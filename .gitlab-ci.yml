@@ -7,7 +7,11 @@ go-test:
   image: golang:1.18
   stage: test
   variables:
+    DISCORD_TOKEN: "TEST ENV"
     GUILD_ID: "TEST ENV"
+    GITLAB_BASE_URL: "gitlab.guanyu.dev"
+    CI_TRIGGER_TOKEN: "TEST ENV"
+    PROJECT_ID: "0"
   tags:
     - areschen-server-1
   script:
