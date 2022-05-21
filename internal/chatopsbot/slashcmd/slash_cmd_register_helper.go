@@ -12,41 +12,43 @@ func RegisterAllSlashCommands(scm *SlashCommandManager) {
 		"disgobot": {
 			cmd: &discordgo.ApplicationCommand{
 				Name:        "disgobot",
-				Description: "用於觸發disgobot專案內特定的Pipeline Job",
+				Description: "disgobot專案管理",
 				Options: []*discordgo.ApplicationCommandOption{
 					{
-						Type:        discordgo.ApplicationCommandOptionString,
-						Name:        "branch",
-						Description: "目標Branch",
-						Choices: []*discordgo.ApplicationCommandOptionChoice{
+						Name:        "run",
+						Description: "觸發專案內特定的Pipeline Job",
+						Options: []*discordgo.ApplicationCommandOption{
 							{
-								Name:  "dev",
-								Value: "dev",
-							},
-							{
-								Name:  "main",
-								Value: "main",
+								Name:        "deploy",
+								Description: "部屬disgobot容器",
+								Type:        discordgo.ApplicationCommandOptionSubCommand,
+								Options: []*discordgo.ApplicationCommandOption{
+									{
+										Type:        discordgo.ApplicationCommandOptionString,
+										Name:        "env",
+										Description: "部屬目標環境",
+										Choices: []*discordgo.ApplicationCommandOptionChoice{
+											{
+												Name:  "dev",
+												Value: "dev",
+											},
+											{
+												Name:  "release",
+												Value: "release",
+											},
+										},
+										Required: true,
+									},
+									{
+										Type:        discordgo.ApplicationCommandOptionString,
+										Name:        "tag",
+										Description: "目標Image標籤",
+										Required:    true,
+									},
+								},
 							},
 						},
-						Required: true,
-					},
-					{
-						Type:        discordgo.ApplicationCommandOptionString,
-						Name:        "job",
-						Description: "目標Job",
-						Choices: []*discordgo.ApplicationCommandOptionChoice{
-							{
-								Name:  "deploy",
-								Value: "deploy",
-							},
-						},
-						Required: true,
-					},
-					{
-						Type:        discordgo.ApplicationCommandOptionString,
-						Name:        "version",
-						Description: "Image版本",
-						Required:    true,
+						Type: discordgo.ApplicationCommandOptionSubCommandGroup,
 					},
 				},
 			},
@@ -60,8 +62,9 @@ func RegisterAllSlashCommands(scm *SlashCommandManager) {
 
 				// Create a pipeline trigger service
 				pts := gitlab.NewPipelineTriggerService()
-				response, err := pts.TriggerPipeline(optionMap["branch"].StringValue(), optionMap["job"].StringValue(), map[string]string{
-					"IMAGE_VERSION": optionMap["version"].StringValue(),
+				response, err := pts.TriggerPipeline("main", "deploy", map[string]string{
+					"ENV_TARGET": optionMap["env"].StringValue(),
+					"IMAGE_TAG":  optionMap["tag"].StringValue(),
 				})
 
 				// Check the request success or not
