@@ -51,5 +51,5 @@ Just started.
 - [ ] Refactor pkg/restapi/gitlab/pipeline_trigger.go TriggerPipeline Function
 - [ ] Refactor internal/chatopsbot/slashcmd/slash_cmd_register_helper.go RegisterAllSlashCommands Function
 - [ ] Add unit test for pkg/restapi/gitlab
-- [ ] Add job scripts with discord channel callback to .gitlab-ci.yml in the disgobot project
+- [X] Add job scripts with discord channel callback to .gitlab-ci.yml in the disgobot project
 - [ ] Make documentation
