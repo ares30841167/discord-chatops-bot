@@ -63,8 +63,9 @@ func RegisterAllSlashCommands(scm *SlashCommandManager) {
 				// Create a pipeline trigger service
 				pts := gitlab.NewPipelineTriggerService()
 				response, err := pts.TriggerPipeline("main", "deploy", map[string]string{
-					"ENV_TARGET": optionMap["env"].StringValue(),
-					"IMAGE_TAG":  optionMap["tag"].StringValue(),
+					"TRIGGERED_USER_ID": i.Member.User.ID,
+					"ENV_TARGET":        optionMap["env"].StringValue(),
+					"IMAGE_TAG":         optionMap["tag"].StringValue(),
 				})
 
 				// Check the request success or not
