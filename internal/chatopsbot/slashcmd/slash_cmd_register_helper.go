@@ -54,7 +54,7 @@ func RegisterAllSlashCommands(scm *SlashCommandManager) {
 			},
 			cmdHandler: func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 				// Create a map from options that provided by the user
-				options := i.ApplicationCommandData().Options
+				options := i.ApplicationCommandData().Options[0].Options[0].Options
 				optionMap := make(map[string]*discordgo.ApplicationCommandInteractionDataOption, len(options))
 				for _, opt := range options {
 					optionMap[opt.Name] = opt
