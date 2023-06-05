@@ -7,7 +7,7 @@ This is a discord bot project which will be written in Golang.
 
 This bot will be used to trigger the pipeline of the disgobot project in GitLab and return the result back to Discord.
 
-2023/06/05 Update: This project is not a generic tool yet. It is just tools I wrote for a certain project. So this repo is more like a showcase, not a repo for developing a production tool. Maybe it will be 
+2023/06/05 Update: This project is not a generic tool yet. It is just tools I wrote for a certain project. So this repo is more like a showcase, not a repo for developing a production tool.
 
 ## Installation
 - Clone this project first
